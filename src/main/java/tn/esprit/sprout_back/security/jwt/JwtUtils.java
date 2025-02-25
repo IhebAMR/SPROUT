@@ -65,6 +65,7 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String authToken) {
         try {
+<<<<<<< HEAD
             Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
             return true;
         } catch (MalformedJwtException e) {
@@ -75,6 +76,32 @@ public class JwtUtils {
             logger.error("JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty: {}", e.getMessage());
+=======
+            Jws<Claims> claimsJws = Jwts.parserBuilder()
+                    .setSigningKey(key())
+                    .build()
+                    .parseClaimsJws(authToken);
+
+            Claims claims = claimsJws.getBody();
+
+            // Exemple : Valider un claim personnalisé
+            String username = claims.getSubject();
+            if (username == null || username.isEmpty()) {
+                logger.error("Invalid JWT token: Missing subject claim");
+                return false;
+            }
+
+            logger.debug("JWT token is valid for user: {}", username);
+            return true;
+        } catch (ExpiredJwtException e) {
+            logger.error("JWT token is expired: {} - Token: {}", e.getMessage(), authToken);
+        } catch (MalformedJwtException e) {
+            logger.error("Invalid JWT token: {} - Token: {}", e.getMessage(), authToken);
+        } catch (UnsupportedJwtException e) {
+            logger.error("JWT token is unsupported: {} - Token: {}", e.getMessage(), authToken);
+        } catch (IllegalArgumentException e) {
+            logger.error("JWT claims string is empty: {} - Token: {}", e.getMessage(), authToken);
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
         }
 
         return false;

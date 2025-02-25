@@ -24,7 +24,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 @Configuration
+<<<<<<< HEAD
 
+=======
+@EnableWebSecurity
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
 @EnableMethodSecurity
 //(securedEnabled = true,
 //jsr250Enabled = true,
@@ -71,10 +75,20 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+<<<<<<< HEAD
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
                                 .anyRequest().authenticated()
+=======
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/public/**", "/api/auth/**", "/api/test/**").permitAll() // Routes publiques
+                        .requestMatchers("/api/auth/profile").authenticated() // Routes nécessitant une authentification
+                        .anyRequest().authenticated() // Toutes les autres requêtes doivent être authentifiées
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/user", true) // Redirection après login réussi
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
                 );
 
         http.authenticationProvider(authenticationProvider());
@@ -83,5 +97,11 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 
         return http.build();
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
 }
 

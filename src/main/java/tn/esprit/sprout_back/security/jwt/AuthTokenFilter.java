@@ -35,6 +35,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
+<<<<<<< HEAD
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
@@ -45,12 +46,26 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
+=======
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                logger.info("User authenticated: {}", username);  // Log to check user authentication
+            } else {
+                logger.warn("JWT is missing or invalid");
+            }
+        } catch (Exception e) {
+            logger.error("Error in authentication filter: {}", e.getMessage());
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
         }
 
         filterChain.doFilter(request, response);
     }
 
     private String parseJwt(HttpServletRequest request) {
+<<<<<<< HEAD
         String jwt = jwtUtils.getJwtFromCookies(request);
         return jwt;
     }
@@ -59,6 +74,21 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         return path.startsWith("/api/auth/");
+=======
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7);
+        }
+        return null;
+    }
+
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        // Exclure uniquement les endpoints publics sous /api/auth/
+        return path.startsWith("/api/auth/signin") || path.startsWith("/api/auth/signup");
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
     }
 }
 

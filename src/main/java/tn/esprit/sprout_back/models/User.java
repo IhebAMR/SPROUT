@@ -1,9 +1,15 @@
 package tn.esprit.sprout_back.models;
 
 import java.util.HashSet;
+<<<<<<< HEAD
 import java.util.Set;
 
 
+=======
+import java.util.List;
+import java.util.Set;
+
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -32,8 +38,18 @@ public class User {
     @DBRef
     private Set<Role> roles = new HashSet<>();
 
+<<<<<<< HEAD
     private String resetToken; // Ajout du champ pour le token de réinitialisation
 
+=======
+    private List<String> skills; // Compétences de l'utilisateur
+    private List<String> certifications; // Certifications de l'utilisateur
+
+    @DBRef
+    private Profile profile; // Référence au profil de l'utilisateur
+
+    private String resetToken; // Token pour la réinitialisation du mot de passe
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
 
     public User() {
     }
@@ -44,6 +60,10 @@ public class User {
         this.password = password;
     }
 
+<<<<<<< HEAD
+=======
+    // Getters et Setters pour tous les attributs
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
     public String getId() {
         return id;
     }
@@ -84,7 +104,34 @@ public class User {
         this.roles = roles;
     }
 
+<<<<<<< HEAD
     // Getters et Setters pour resetToken
+=======
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public List<String> getCertifications() {
+        return certifications;
+    }
+
+    public void setCertifications(List<String> certifications) {
+        this.certifications = certifications;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
     public String getResetToken() {
         return resetToken;
     }

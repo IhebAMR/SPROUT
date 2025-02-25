@@ -102,4 +102,8 @@ public class UserDetailsImpl implements UserDetails {
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b979afa127bbd0ca73396ab069e703bcb0ea14d2
 }
