@@ -1,7 +1,6 @@
 package tn.esprit.sprout_back.models;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.validation.constraints.Email;
@@ -32,14 +31,12 @@ public class User {
     @DBRef
     private Set<Role> roles = new HashSet<>();
 
-    private List<String> skills; // Compétences de l'utilisateur
-    private List<String> certifications; // Certifications de l'utilisateur
-
     @DBRef
-    private Profile profile; // Référence au profil de l'utilisateur
+    private Profile profile; // Ensure this is properly mapped
 
-    private String resetToken; // Token pour la réinitialisation du mot de passe
+    private String resetToken;
 
+    // Constructors, getters, and setters
     public User() {
     }
 
@@ -49,7 +46,6 @@ public class User {
         this.password = password;
     }
 
-    // Getters et Setters pour tous les attributs
     public String getId() {
         return id;
     }
@@ -88,22 +84,6 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
-    public List<String> getCertifications() {
-        return certifications;
-    }
-
-    public void setCertifications(List<String> certifications) {
-        this.certifications = certifications;
     }
 
     public Profile getProfile() {

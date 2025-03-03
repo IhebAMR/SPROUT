@@ -1,6 +1,7 @@
 package tn.esprit.sprout_back.payload.request;
 
 import java.util.Set;
+import java.util.List;
 
 import jakarta.validation.constraints.*;
 
@@ -19,6 +20,8 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    private List<String> skills; // Add this field for skills
 
     public String getUsername() {
         return username;
@@ -48,8 +51,15 @@ public class SignupRequest {
         return this.roles;
     }
 
-    public void setRole(Set<String> roles) {
+    public void setRoles(Set<String> roles) { // Fix method name to setRoles
         this.roles = roles;
     }
-}
 
+    public List<String> getSkills() { // Getter for skills
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) { // Setter for skills
+        this.skills = skills;
+    }
+}

@@ -1,9 +1,12 @@
 package tn.esprit.sprout_back.payload.response;
 
+import java.util.List;
+
 public class ProfileResponse {
     private String bio;
     private String avatar;
     private String contactInfo;
+    private List<String> skills; // Ajout des compétences
 
     // Getters et Setters
     public String getBio() {
@@ -28,5 +31,13 @@ public class ProfileResponse {
 
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
     }
 }
