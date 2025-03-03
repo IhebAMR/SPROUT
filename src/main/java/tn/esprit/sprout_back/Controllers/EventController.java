@@ -9,7 +9,8 @@ import tn.esprit.sprout_back.Service.EventService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/events")
+@RequestMapping("/api/events")
+@CrossOrigin(origins ="*")
 public class EventController {
     @Autowired
     private EventService eventService;

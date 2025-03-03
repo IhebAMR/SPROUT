@@ -1,8 +1,6 @@
 package tn.esprit.sprout_back.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,9 +8,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Document(collection = "events")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Events {
     @Id
     private String id;
